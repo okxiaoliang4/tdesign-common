@@ -1,3 +1,4 @@
+import { MessagePlugin } from '../../../message'
 import { SizeUnit } from './types';
 import log from '../log/log';
 
@@ -224,6 +225,9 @@ export function getFileList(files: FileList, accept: string = '') {
   for (let i = 0; i < files.length; i++) {
     if (validateFileType(accept, files[i].type, files[i].name)) {
       fileList.push(files[i]);
+    } else {
+      MessagePlugin.error('格式不支持')
+      return []
     }
   }
   return fileList;
