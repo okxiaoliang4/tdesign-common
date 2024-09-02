@@ -343,14 +343,15 @@ export function largeNumberAdd(num1: string, num2: string): string {
  * @param {Boolean} largeNumber 是否为大数
  */
 export function largeNumberToFixed(
-  number: string | number, decimalPlaces: number = 0, largeNumber = true,
+  number: string | number, decimalPlaces: number = 0, largeNumber = true, isFillZero = false
 ): string {
   if (!largeNumber) return Number(number).toFixed(decimalPlaces);
   if (!isString(number)) return String(number);
   const [num1, num2] = number.split('.');
   // 如果不存在小数点，则补足位数
   if (!num2) {
-    return decimalPlaces ? [number, (fillZero(decimalPlaces))].join('.') : number;
+    // return decimalPlaces ? [number, (fillZero(decimalPlaces))].join('.') : number;
+    return number;
   }
   // 存在小数点，保留 0 位小数，四舍五入
   if (decimalPlaces === 0) {
@@ -359,7 +360,7 @@ export function largeNumberToFixed(
   // 存在小数点，保留 > 0 位小数，四舍五入（此时，整数位不会发生任何变化，只需关注小数位数）
   let decimalNumber = num2.slice(0, decimalPlaces);
   if (num2.length < decimalPlaces) {
-    decimalNumber += (fillZero(decimalPlaces - num2.length));
+    // decimalNumber += (fillZero(decimalPlaces - num2.length));
   } else {
     decimalNumber = Number(num2[decimalPlaces]) >= 5
       ? largePositiveNumberAdd(decimalNumber, '1')
