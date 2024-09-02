@@ -167,6 +167,7 @@ export default {
       date: '${name} is invalid',
       url: '${name} is invalid',
       required: '${name} is required',
+      whitespace: '${name} cannot be empty',
       max: '${name} must be at least ${validate} characters',
       min: '${name} cannot be longer than ${validate} characters',
       len: '${name} must be exactly ${validate} characters',
@@ -178,6 +179,7 @@ export default {
       boolean: '${name} is not a boolean',
       number: '${name} must be a number',
     },
+    colonText: ':',
   },
   input: {
     placeholder: 'please enter',
@@ -230,6 +232,21 @@ export default {
   typography: {
     expandText: 'more',
     collapseText: 'collapse',
-    copiedText: 'copied'
-  }
+    copiedText: 'copied',
+  },
+  rate: {
+    rateText: ['terrible', 'disappointed', 'normal', 'satisfied', 'surprised'],
+  },
+  empty: {
+    titleText: {
+      maintenance: 'Under Construction',
+      success: 'Success',
+      fail: 'Failure',
+      empty: 'No Data',
+      networkError: 'Network Error',
+    }
+  },
+  descriptions: {
+    colonText: ':',
+  },
 } as const;

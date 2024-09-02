@@ -177,6 +177,7 @@ export default {
     errorMessage: {
       date: 'الرجاء إدخال ${name} الصحيح',
       url: 'الرجاء إدخال ${name} الصحيح',
+      whitespace: 'لا يمكن أن يكون ${name} فارغًا',
       required: 'مطلوب ${name}',
       max: 'يمكن أن يحتوي ${name} على ما يصل إلى ${validate} حرفًا',
       min: 'لا يمكن أن يكون ${name} أقل من ${validate} حرفًا',
@@ -226,6 +227,18 @@ export default {
   typography: {
     expandText: 'توسيع',
     collapseText: 'طي',
-    copiedText: 'النسخ اكتمل'
-  }
+    copiedText: 'النسخ اكتمل',
+  },
+  rate: {
+    rateText: ['فظيع', 'خيبة أمل', 'عادي', 'راض', 'مفاجأة'],
+  },
+  empty: {
+    titleText: {
+      maintenance: 'تحت الإنشاء',
+      success: 'النجاح',
+      fail: 'الفشل',
+      empty: 'لا توجد بيانات حتى الآن',
+      networkError: 'خطأ في الشبكة',
+    }
+  },
 } as const;
