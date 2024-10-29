@@ -395,7 +395,7 @@ export function largeNumberToFixed(
   let [num1, num2] = number.split('.');
   // 如果不存在小数点，则补足位数
   if (!num2) {
-    return (places > 0 && enableRound) ? [number, (fillZero(places))].join('.') : number;
+    return (places > 0 && enableRound) ? [number, ''].join('.') : number;
   }
   // 存在小数点，保留 0 位小数，灵活配置四舍五入
   if (places === 0) {
@@ -404,7 +404,7 @@ export function largeNumberToFixed(
   // 存在小数点，保留 > 0 位小数，灵活配置四舍五入
   let decimalNumber = num2.slice(0, places);
   if (num2.length < places) {
-    decimalNumber += (fillZero(places - num2.length));
+    // decimalNumber += (fillZero(places - num2.length));
   } else if (enableRound) {
     // 用于判断是否处于 1.08 这种小数为0开始的边界情况
     const leadZeroNum = decimalNumber.match(/^0+/)?.[0].length;
@@ -424,14 +424,14 @@ export function largeNumberToFixed(
       && needAdded
       && leadZeroNum + decimalNumber.length >= places
     ) {
-      decimalNumber = `${fillZero(
-        places - decimalNumber.length
-      )}${decimalNumber}`;
+      // decimalNumber = `${fillZero(
+      //   places - decimalNumber.length
+      // )}${decimalNumber}`;
     }
     // 边界场景2:（0.99 这种可能进位的边界情况）：计算后有误判的可能，如995 四舍五入后需进位
     if (leadNineNum && decimalNumber.length > places) {
       num1 = (Number(num1) + 1).toString();
-      decimalNumber = fillZero(places);
+      // decimalNumber = fillZero(places);
     }
   }
   return [num1, decimalNumber].join('.');
