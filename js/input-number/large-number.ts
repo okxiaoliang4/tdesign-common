@@ -395,7 +395,7 @@ export function largeNumberToFixed(
   let [num1, num2] = number.split('.');
   // 如果不存在小数点，则补足位数
   if (!num2) {
-    return (places > 0 && enableRound) ? [number, ''].join('.') : number;
+    return number;
   }
   // 存在小数点，保留 0 位小数，灵活配置四舍五入
   if (places === 0) {
@@ -418,21 +418,20 @@ export function largeNumberToFixed(
       ? largePositiveNumberAdd(decimalNumber, '1')
       : decimalNumber;
 
-    // 边界场景1（1.08 这种小数为0开始的边界情况）：计算后有误判的可能，如008 +1 误判为 8+1，需要手动补 0
     if (
       leadZeroNum
       && needAdded
       && leadZeroNum + decimalNumber.length >= places
     ) {
-      // decimalNumber = `${fillZero(
-      //   places - decimalNumber.length
-      // )}${decimalNumber}`;
+      decimalNumber = `${fillZero(
+        places - decimalNumber.length
+      )}${decimalNumber}`;
     }
     // 边界场景2:（0.99 这种可能进位的边界情况）：计算后有误判的可能，如995 四舍五入后需进位
     if (leadNineNum && decimalNumber.length > places) {
       num1 = (Number(num1) + 1).toString();
-      // decimalNumber = fillZero(places);
+      decimalNumber = fillZero(places);
     }
   }
-  return [num1, decimalNumber].join('.');
+  return [num1, removeInvalidZero(decimalNumber, true)].join('.');
 }
